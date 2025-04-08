@@ -1,6 +1,3 @@
-//TODO: https://www.youtube.com/watch?v=ea_4Ug5WWYE&t=32s&ab_channel=Tiago
-//FIXME: ±20:31 time
-
 package handler
 
 import (
@@ -8,6 +5,7 @@ import (
 
 	"github.com/verestov/kitchen/services/common/genproto/orders"
 	"github.com/verestov/kitchen/services/orders/types"
+	"google.golang.org/grpc"
 )
 
 type OrderGrpcHandler struct {
@@ -15,8 +13,12 @@ type OrderGrpcHandler struct {
 	orders.UnimplementedOrderServiceServer
 }
 
-func NewGrpcOrderService() *OrderGrpcHandler {
-	gRPCHandler := &OrderGrpcHandler{}
+func NewGrpcOrderService(grpc *grpc.Server, ordersService types.OrderService) {
+	gRPCHandler := &OrderGrpcHandler{
+		ordersService: ordersService,
+	}
+
+	orders.RegisterOrderServiceServer(grpc, gRPCHandler)
 
 }
 

@@ -1,3 +1,13 @@
+.PHONY: run-orders
+
+run-orders:
+	@go run services/orders/*.go
+
+.PHONY: run-kitchen
+
+run-kitchen:
+	@go run services/kitchen/*.go
+
 .PHONY: gen
 
 gen:
