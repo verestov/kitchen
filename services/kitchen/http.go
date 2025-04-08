@@ -39,7 +39,7 @@ func (s *httpServer) Run() error {
 			log.Fatalf("client error: %v", err)
 		}
 
-		res, err := c.GetOrders(ctx, &orders.GetOrdersRequest{
+		res, err := c.GetOrders(ctx, &orders.GetOrderRequest{
 			CustomerID: 42,
 		})
 		if err != nil {
